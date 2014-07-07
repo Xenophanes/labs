@@ -25,8 +25,8 @@ We will try four ways to look at NGS coverage: using the standalone Java program
 Copy these files from the R library directory to the current working directory. First set the working directory to the source file location. We need to use the `Rsamtools` library to index the BAM files for using IGV.
 
 ```{r}
-system(paste("cp",fl1,basename(fl1)))
-system(paste("cp",fl2,basename(fl2)))
+file.copy(from=fl1,to=basename(fl1))
+file.copy(from=fl2,to=basename(fl2))
 library(Rsamtools)
 indexBam(basename(fl1))
 indexBam(basename(fl2))
@@ -107,6 +107,7 @@ map
 Now we extract the exons for each gene, and then the exons for the gene *lgs*.
 
 ```{r}
+library(GenomicFeatures)
 grl <- exonsBy(TxDb.Dmelanogaster.UCSC.dm3.ensGene, by="gene")
 gene <- grl[[map$ensembl_gene_id[1]]]
 gene
@@ -165,4 +166,34 @@ autoplot(fl1, which=z)
 autoplot(fl2, which=z)
 ```
 
+## Footnotes
+
+- IGV 
+<https://www.broadinstitute.org/igv/home>
+
+- Gviz
+<http://www.bioconductor.org/packages/release/bioc/html/Gviz.html>
+
+- ggbio
+<http://www.bioconductor.org/packages/release/bioc/html/ggbio.html>
+
+- UCSC Genome Browser: zooms and scrolls over chromosomes, showing the work of annotators worldwide
+<http://genome.ucsc.edu/>
+
+- Ensembl genome browser: genome databases for vertebrates and other eukaryotic species
+<http://ensembl.org>
+
+- Roadmap Epigenome browser: public resource of human epigenomic data
+<http://www.epigenomebrowser.org>
+<http://genomebrowser.wustl.edu/>
+<http://epigenomegateway.wustl.edu/>
+
+- "Sashimi plots" for RNA-Seq
+<http://genes.mit.edu/burgelab/miso/docs/sashimi.html>
+
+- Circos: designed for visualizing genomic data in a cirlce
+<http://circos.ca/>
+
+- SeqMonk: a tool to visualise and analyse high throughput mapped sequence data
+<http://www.bioinformatics.babraham.ac.uk/projects/seqmonk/>
 
